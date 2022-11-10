@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react"
 import { verifyService } from "../services/auth.service"
+import { ClimbingBoxLoader } from "react-spinners"
 
 const AuthContext = createContext()
 
@@ -45,7 +46,9 @@ function AuthWrapper(props){
   if (isFetching === true){ // clausula de guardia
     return(
        <div className="App">  {/*le doy className para que me mantenga todo los estilos en mi aplicacion*/}
-          <h3>... Validando al Usuario</h3>
+        <div className="spinner">
+          <ClimbingBoxLoader size={25} color={"#36d7b7"} />
+        </div>
       </div>
     )
   }
