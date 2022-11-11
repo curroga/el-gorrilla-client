@@ -13,7 +13,7 @@ function Navbar() {
   }
 
   const asignClassName = (navInfo) => {
-    console.log(navInfo.isActive)
+    //console.log(navInfo.isActive)
     if(navInfo.isActive === true) {
       return "nav-active"
     } else {
@@ -35,6 +35,9 @@ function Navbar() {
           <NavLink to="/profile" className={asignClassName}>
             <button>Perfil</button>
             </NavLink>
+          <NavLink to="/calles" className={asignClassName}>
+            <button>Lista de calles</button>
+            </NavLink>          
             <div className='nav-inactive'>
               <button onClick={handleLogout}>Cerrar Sesion</button>
             </div>
