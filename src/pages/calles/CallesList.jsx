@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import AddCalles from '../../components/AddCalles'
 import { Link } from 'react-router-dom'
 import { getAllCallesService } from '../../services/calles.service'
 import { ClimbingBoxLoader } from "react-spinners"
+import { AuthContext } from "../../context/auth.context"
+import Search from '../../components/Search'
 
 function CallesList() {
 
+  const { isAdminIn } = useContext(AuthContext)
+
   //1. creamos el estado que almacena la data de la API
   const [list, setList] = useState([])
+  const [filterList, setFilterList] = useState([])
   const [ isFetching, setIsFetching] = useState(true)
 
   //2. llamar a la api
@@ -22,6 +27,7 @@ function CallesList() {
       console.log(response)
       // 3. guardar la info en el estado
       setList(response.data)
+      setFilterList(response.data)
       setIsFetching(false)
       
     } catch (error) {
@@ -40,23 +46,53 @@ function CallesList() {
       </div>
     )
   }
+  const filterCalles = (filterQuery) => {
+    const filteredCalles = list.filter((eachCalle) => {
+      return eachCalle.name.startsWith(filterQuery)
+    })
+    setFilterList(filteredCalles)
+  }
 
 
   //5. renderizar la data
   return (
     <div>
 
-      <AddCalles actualizarLista={getData} />
-      <h3>Listado de calles</h3>
-      
-      {list.map((eachCalle) => {
-        return (
-          <p key={eachCalle._id}>
-            <Link to={`/calles/${eachCalle._id}/details`}>{eachCalle.name}</Link>
-          </p>
-        )
+      {isAdminIn === true ? (
+      <div>
+          <div>
+            <AddCalles actualizarLista={getData} />
+          </div>
+          <div>
+            <Search filterCalles={filterCalles} />
+          </div>
 
-      })}
+          <div>
+        <h3>Listado de calles</h3>        
+        {filterList.map((eachCalle) => {
+          return (
+            <p key={eachCalle._id}>
+              <Link to={`/calles/${eachCalle._id}/details`}>{eachCalle.name}</Link>
+            </p>
+          )  
+        })}
+         </div>
+
+      </div>        
+      ) : (
+      <div>
+        <h3>Listado de calles</h3>        
+        {filterList.map((eachCalle) => {
+          return (
+            <p key={eachCalle._id}>
+              <Link to={`/calles/${eachCalle._id}/details`}>{eachCalle.name}</Link>
+            </p>
+          )  
+        })}
+      </div>
+      )
+
+    }
     </div>
   )
 }

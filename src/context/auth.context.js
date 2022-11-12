@@ -7,6 +7,7 @@ const AuthContext = createContext()
 function AuthWrapper(props){
   // todos los estados y funciones globales
   const [isLoggedIn, setIsloggedIn] = useState(false) // verdadero o falso si el usuario esta logeado
+  const [isAdminIn, setIsadminIn] = useState(false) // verdadero o faso si el user es admin
   const [user, setUser ] = useState(null) // si necesimatos el id del usuario lo almacenamos aqui
   const [isFetching, setIsFetching] = useState(true)
 
@@ -25,12 +26,16 @@ function AuthWrapper(props){
 
       // una vez que tenemos validado el Token en FE
       setIsloggedIn(true)
+      if(response.data.role === "admin"){
+        setIsadminIn(true)
+      }
       setUser(response.data)
       setIsFetching(false)
       
     } catch (error) {
       console.log(error)
       setIsloggedIn(false)
+      setIsadminIn(false)
       setUser(null)
       setIsFetching(false)
     }
@@ -40,7 +45,8 @@ function AuthWrapper(props){
   const passedContext = {
     isLoggedIn,
     user,
-    authenticaUser
+    authenticaUser,
+    isAdminIn
   }
 
   if (isFetching === true){ // clausula de guardia
