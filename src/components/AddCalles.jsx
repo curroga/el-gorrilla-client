@@ -33,6 +33,7 @@ function AddCalles(props) {
 
   return (
     <div>
+      <h3>Añadir una nueva calle</h3>
       <form>
         <label htmlFor="name">Nombre:</label>
         <input value={nameInput} type="text" name='name' onChange={handleNameChange} />

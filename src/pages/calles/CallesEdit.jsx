@@ -9,7 +9,7 @@ function CallesEdit() {
 
   const [ nameInput, setNameInput] = useState("")
   const [ numAparcamientosInput, setNumAparcamientosInput] = useState(0)
-  const [ positionMarkerInput, setPositionMarkerInput] = useState([])
+  const [ positionMarkerInput, setPositionMarkerInput] = useState(0) //! Preguntar
 
   useEffect(() => {
     getData()     
@@ -43,7 +43,7 @@ function CallesEdit() {
       }
 
       await updateCallesService(calleId, updateCalle)
-      navigate("/calles")
+      navigate(`/calles/${calleId}/details`)
       
     } catch (error) {
       navigate("/error")

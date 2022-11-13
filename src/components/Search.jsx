@@ -8,7 +8,7 @@ function Search(props) {
   }
   return (
     <div>
-      <h5>Search</h5>
+      <h3>Buscador</h3>
       <input type="text" name='search' value={searchInput} onChange={handleChange} />
     </div>
   )

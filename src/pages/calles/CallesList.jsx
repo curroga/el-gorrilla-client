@@ -5,6 +5,7 @@ import { getAllCallesService } from '../../services/calles.service'
 import { ClimbingBoxLoader } from "react-spinners"
 import { AuthContext } from "../../context/auth.context"
 import Search from '../../components/Search'
+import MapView from '../../components/MapView'
 
 function CallesList() {
 
@@ -77,10 +78,19 @@ function CallesList() {
           )  
         })}
          </div>
+         <div>
+            <h3>Mapa</h3>
+            <MapView />
+        </div>
 
       </div>        
-      ) : (
+      ) : (    
+      
       <div>
+        <div>
+            <Search filterCalles={filterCalles} />
+        </div>
+        <div>
         <h3>Listado de calles</h3>        
         {filterList.map((eachCalle) => {
           return (
@@ -89,6 +99,11 @@ function CallesList() {
             </p>
           )  
         })}
+        </div>
+        <div>
+            <h3>Mapa</h3>
+            <MapView />
+        </div>
       </div>
       )
 

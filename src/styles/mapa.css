@@ -1,0 +1,13 @@
+.mapa {
+  width: 50vw;
+  height: 50vh;  
+  border: 1px solid red; 
+  grid-area: mapa;    
+  
+}
+.container-map {
+  display: grid;
+  grid-template-areas:
+  "mapa" ;
+  margin: 0 25vw;
+}

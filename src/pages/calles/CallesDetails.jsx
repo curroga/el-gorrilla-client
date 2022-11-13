@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import { getCallesDetailsService, deleteCallesService } from '../../services/calles.service'
 
 import { ClimbingBoxLoader } from "react-spinners"
 
+import { AuthContext } from "../../context/auth.context"
+
+import MapView from '../../components/MapView'
+
 function CallesDetails() {
+
+  const { isAdminIn } = useContext(AuthContext)
 
   const { calleId } = useParams()
   const navigate = useNavigate()
@@ -60,7 +66,8 @@ function CallesDetails() {
   return (
     <div>
       <h3>Detalles de la calle</h3>
-      <div>
+      {isAdminIn === true ? (
+        <div>
         <h5>Nombre: {details.name}</h5>
         <p>Nº de Aparcamientos: {details.numAparcamientos}</p>
         <p>Estado del Aparcamiento: {details.estadoAparcamiento}</p>
@@ -69,6 +76,19 @@ function CallesDetails() {
         <button onClick={handleDelete}>Borrar</button>
         <Link to={`/calles/${details._id}/edit`}>Ir a editar</Link>
       </div>
+      ):(
+        <div>
+        <h5>Nombre: {details.name}</h5>
+        <p>Nº de Aparcamientos: {details.numAparcamientos}</p>
+        <p>Estado del Aparcamiento: {details.estadoAparcamiento}</p>
+        <p>Posicion del Aparcamiento: {details.positionMarker}</p>
+        <div>
+            <h3>Mapa</h3>
+            <MapView />
+        </div>        
+      </div>
+      )
+      }
     </div>
   )
 }

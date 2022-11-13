@@ -29,14 +29,17 @@ function Navbar() {
     <div>
       {isLoggedIn === true ? (
         <div>
-          <NavLink to="/" className={asignClassName}>
+          {/* <NavLink to="/" className={asignClassName}>
             <button>Home</button>
-            </NavLink>
+            </NavLink> */}
           <NavLink to="/profile" className={asignClassName}>
             <button>Perfil</button>
             </NavLink>
           <NavLink to="/calles" className={asignClassName}>
-            <button>Lista de calles</button>
+            <button>Calles</button>
+            </NavLink>
+            <NavLink to="/cars" className={asignClassName}>
+            <button>Coches</button>
             </NavLink>          
             <div className='nav-inactive'>
               <button onClick={handleLogout}>Cerrar Sesion</button>
