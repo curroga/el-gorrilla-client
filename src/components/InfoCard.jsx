@@ -6,8 +6,8 @@ function InfoCard({ item, onUpdate, onDelete }) {
   function FormEdit(){
 
     const [modeloInput, setModeloInput] = useState(item.modelo)
-    const [matriculaInput, setMatriculaInput] = useState(item.modelo)
-    const [colorInput, setColorInput] = useState(item.modelo)
+    const [matriculaInput, setMatriculaInput] = useState(item.matricula)
+    const [colorInput, setColorInput] = useState(item.color)
 
     function handleSubmit(e) {
       e.preventDefault();

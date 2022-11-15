@@ -18,7 +18,7 @@ function MapView( {detalles} ) {
   return (
     <div className="container-map">      
       <div>
-      <MapContainer center={detalles[0].positionMarker} zoom={15} scrollWheelZoom={true} className="mapa">
+      <MapContainer center={[37.17913079459059, -5.775956770000562]} zoom={15} scrollWheelZoom={true} className="mapa">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
