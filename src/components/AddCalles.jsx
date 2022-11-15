@@ -1,8 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { createCallesService } from '../services/calles.service'
-//import MapView from '../components/MapView'
-import MapWithClickable from './MapWithClickable'
+import MapWithClickable from './maps/MapWithClickable'
 
 
 function AddCalles(props) {
@@ -17,7 +16,7 @@ function AddCalles(props) {
 
   const handleNameChange = (e) => setNameInput(e.target.value)
   const handlenumAparcamientosChange = (e) => setNumAparcamientosInput(e.target.value)
-  // const handlePositionMarkerChange = (e) => setPositionMarkerInput(e.target.value)
+  const handlePositionMarkerChange = (newPosition) => setPositionMarkerInput(newPosition)
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -27,7 +26,9 @@ function AddCalles(props) {
       numAparcamientos: numAparcamientosInput,
       positionMarker: positionMarkerInput
     }
+
     try {
+
       await createCallesService(newCalle)
 
       props.actualizarLista()
@@ -51,7 +52,7 @@ function AddCalles(props) {
         
         <div>
           <h3>Mapa</h3>
-          <MapWithClickable detalles={props.detalles} posicionInicial={positionMarkerInput} />
+          <MapWithClickable detalles={props.detalles} posicionInicial={positionMarkerInput} updatePosition={handlePositionMarkerChange} />
         </div>
 
         <button onClick={handleSubmit}>Agregar</button>

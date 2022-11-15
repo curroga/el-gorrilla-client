@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from "leaflet"
 import 'leaflet/dist/leaflet.css'
-import "../styles/mapa.css"
+import "../../styles/mapa.css"
 import { useMapEvents } from 'react-leaflet/hooks'
 
 
@@ -13,27 +13,32 @@ let DefaultIcon = L.icon({
 })
 L.Marker.prototype.options.icon = DefaultIcon
 
-// COMPONENT NEEDED TO DETECT CLICK EVENT AND RECORD POSITION
-// CAN BE CREATED HERE OR IN SEPARATE FILE
-function LocationDetector({setClickedPosition}) {
+
+// componentes necesitan detectar click event y recordar la posicion
+// SE PUEDE CREAR AQUÍ O EN UN ARCHIVO SEPARADO
+function LocationDetector({setClickedPosition, updatePosition}) {
   useMapEvents({
     click: (event) => {
       console.log(event.latlng)
+      console.log(updatePosition)
       const obj = event.latlng
       setClickedPosition([
         obj.lat.toFixed(5), 
         obj.lng.toFixed(5)
       ])
+      console.log([obj.lat, obj.lng])
+      updatePosition([obj.lat, obj.lng])
     },
   })
   return null
 }
 
-function MapWithClickable( {detalles}, {posicionInicial} ) {
-  console.log(detalles)
-  console.log(posicionInicial)
+function MapWithClickable( { detalles, posicionInicial, updatePosition } ) {
+  //console.log(detalles)
+  //console.log(posicionInicial)
+  console.log(updatePosition)
   const [ clickedPosition, setClickedPosition ] = useState(null)
-  const [ center, setCenter ] = useState([37.17913, -5.775956])
+  const [ center, setCenter ] = useState(posicionInicial)
 
   useEffect(() => {
     setCenter(clickedPosition)
@@ -47,7 +52,7 @@ function MapWithClickable( {detalles}, {posicionInicial} ) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        <LocationDetector setClickedPosition={setClickedPosition}/>
+        <LocationDetector setClickedPosition={setClickedPosition} updatePosition={updatePosition} />
 
         {clickedPosition !== null && (
             <Marker position={clickedPosition}/>

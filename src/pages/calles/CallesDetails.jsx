@@ -6,7 +6,7 @@ import { ClimbingBoxLoader } from "react-spinners"
 
 import { AuthContext } from "../../context/auth.context"
 
-import MapViewDetails from '../../components/MapViewDetails'
+import MapViewDetails from '../../components/maps/MapViewDetails'
 
 function CallesDetails() {
 

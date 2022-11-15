@@ -5,7 +5,7 @@ import { getAllCallesService } from '../../services/calles.service'
 import { ClimbingBoxLoader } from "react-spinners"
 import { AuthContext } from "../../context/auth.context"
 import Search from '../../components/Search'
-import MapView from '../../components/MapView'
+import MapView from '../../components/maps/MapView'
 
 function CallesList() {
 

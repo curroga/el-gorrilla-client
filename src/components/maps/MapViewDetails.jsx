@@ -2,7 +2,7 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from "leaflet"
 import 'leaflet/dist/leaflet.css'
-import "../styles/mapa.css"
+import "../../styles/mapa.css"
 
 
 let DefaultIcon = L.icon({
@@ -18,7 +18,7 @@ function MapView( {detalles} ) {
   return (
     <div className="container-map">      
       <div>
-      <MapContainer center={detalles.positionMarker} zoom={19} scrollWheelZoom={true} className="mapa">
+      <MapContainer center={detalles.positionMarker} zoom={19} scrollWheelZoom={false} className="mapa">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
