@@ -5,7 +5,9 @@ import { updateCarsService, deleteCarsService, getAllCarsService } from '../../s
 import { useNavigate } from 'react-router-dom'
 import { ClimbingBoxLoader } from "react-spinners"
 
-function CarList() {
+
+
+function CarList() { 
 
   const navigate = useNavigate()
 
@@ -23,9 +25,10 @@ function CarList() {
     try {
       const response = await getAllCarsService()
       console.log(response)
-      //3. guardar la info en el estado
-      setList(response.data)
-      setIsFetching(false)
+      //3. guardar la info en el estado      
+        setList(response.data)
+        setIsFetching(false)
+      
 
     } catch (error) {
       console.log(error)

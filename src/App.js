@@ -12,8 +12,7 @@ import CallesList from './pages/calles/CallesList';
 import CallesDetails from './pages/calles/CallesDetails';
 import CallesEdit from './pages/calles/CallesEdit';
 import CarList from './pages/cars/CarList';
-import CarDetails from './pages/cars/CarDetails';
-import CarEdit from './pages/cars/CarEdit';
+
 
 function App() {
   return (
@@ -34,8 +33,7 @@ function App() {
         <Route path='/calles/:calleId/edit' element={ <IsPrivate> <CallesEdit /> </IsPrivate>} />
 
         <Route path='/cars' element={ <IsPrivate> <CarList /> </IsPrivate>} />
-        <Route path='/cars/:carId/details' element={ <IsPrivate> <CarDetails /> </IsPrivate>} />
-        <Route path='/cars/:carId/edit' element={ <IsPrivate> <CarEdit /> </IsPrivate>} />
+        
 
         {/* potenciales errores */}
         <Route path='/error' element={ <Error /> } />

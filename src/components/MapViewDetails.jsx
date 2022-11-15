@@ -18,20 +18,17 @@ function MapView( {detalles} ) {
   return (
     <div className="container-map">      
       <div>
-      <MapContainer center={detalles[0].positionMarker} zoom={15} scrollWheelZoom={true} className="mapa">
+      <MapContainer center={detalles.positionMarker} zoom={19} scrollWheelZoom={true} className="mapa">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {detalles.map((eachMarker) => {
-          return (
-           <Marker key={eachMarker._id} position={eachMarker.positionMarker}>
-             <Popup>
-               Aparcamiento: <br /> Libre.
-             </Popup>
-           </Marker>             
-          )
-        })}
+        />        
+        <Marker position={detalles.positionMarker}>
+          <Popup>
+           Aparcamiento: <br /> {detalles.estadoAparcamiento}.
+         </Popup>
+       </Marker>             
+          
       </MapContainer>
       </div>
     </div>

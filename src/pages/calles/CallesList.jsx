@@ -15,6 +15,8 @@ function CallesList() {
   const [list, setList] = useState([])
   const [filterList, setFilterList] = useState([])
   const [ isFetching, setIsFetching] = useState(true)
+  const [mostrarAddCalles, setMostrarAddCalles] = useState(false)
+  const [mostrarMapa, setMostrarMapa] = useState(false)
 
   //2. llamar a la api
   useEffect(() => {
@@ -26,6 +28,7 @@ function CallesList() {
     try {
       const response = await getAllCallesService()
       console.log(response)
+      
       // 3. guardar la info en el estado
       setList(response.data)
       setFilterList(response.data)
@@ -54,60 +57,46 @@ function CallesList() {
     setFilterList(filteredCalles)
   }
 
+  const handleClick = () => setMostrarAddCalles(!mostrarAddCalles)
+  const handleClickMapa = () => setMostrarMapa(!mostrarMapa)
+
 
   //5. renderizar la data
   return (
     <div>
-
-      {isAdminIn === true ? (
+     
       <div>
+        { isAdminIn === true ? (
+
           <div>
-            <AddCalles actualizarLista={getData} />
+            <button onClick={handleClick}>Añadir calle</button>
+          { mostrarAddCalles === true ? <AddCalles actualizarLista={getData} detalles={filterList} /> :null}
           </div>
+
+          ) : null}
+
           <div>
             <Search filterCalles={filterCalles} />
           </div>
 
           <div>
-        <h3>Listado de calles</h3>        
-        {filterList.map((eachCalle) => {
-          return (
-            <p key={eachCalle._id}>
-              <Link to={`/calles/${eachCalle._id}/details`}>{eachCalle.name}</Link>
-            </p>
-          )  
-        })}
-         </div>
+            <h3>Listado de calles</h3>        
+             {filterList.map((eachCalle) => {
+               return (
+                 <p key={eachCalle._id}>
+                   <Link to={`/calles/${eachCalle._id}/details`}>{eachCalle.name}</Link>
+                 </p>
+              )  
+           })}
+          </div>
+
          <div>
-            <h3>Mapa</h3>
-            <MapView />
+          <button onClick={handleClickMapa}>mapa</button>
+          { mostrarMapa === true ? <MapView detalles={filterList} /> :null}          
         </div>
 
-      </div>        
-      ) : (    
-      
-      <div>
-        <div>
-            <Search filterCalles={filterCalles} />
-        </div>
-        <div>
-        <h3>Listado de calles</h3>        
-        {filterList.map((eachCalle) => {
-          return (
-            <p key={eachCalle._id}>
-              <Link to={`/calles/${eachCalle._id}/details`}>{eachCalle.name}</Link>
-            </p>
-          )  
-        })}
-        </div>
-        <div>
-            <h3>Mapa</h3>
-            <MapView />
-        </div>
-      </div>
-      )
-
-    }
+      </div>   
+    
     </div>
   )
 }

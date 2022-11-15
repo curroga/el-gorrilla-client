@@ -6,7 +6,7 @@ import { ClimbingBoxLoader } from "react-spinners"
 
 import { AuthContext } from "../../context/auth.context"
 
-import MapView from '../../components/MapView'
+import MapViewDetails from '../../components/MapViewDetails'
 
 function CallesDetails() {
 
@@ -68,13 +68,20 @@ function CallesDetails() {
       <h3>Detalles de la calle</h3>
       {isAdminIn === true ? (
         <div>
-        <h5>Nombre: {details.name}</h5>
-        <p>Nº de Aparcamientos: {details.numAparcamientos}</p>
-        <p>Estado del Aparcamiento: {details.estadoAparcamiento}</p>
-        <p>Posicion del Aparcamiento: {details.positionMarker}</p>
+          <div>
+            <h5>Nombre: {details.name}</h5>
+            <p>Nº de Aparcamientos: {details.numAparcamientos}</p>
+            <p>Estado del Aparcamiento: {details.estadoAparcamiento}</p>
+            <p>Posicion del Aparcamiento: {details.positionMarker}</p>
 
-        <button onClick={handleDelete}>Borrar</button>
-        <Link to={`/calles/${details._id}/edit`}>Ir a editar</Link>
+            <button onClick={handleDelete}>Borrar</button>
+            <Link to={`/calles/${details._id}/edit`}>Ir a editar</Link>
+          </div>
+          <div>
+            <h3>Mapa</h3>
+            <MapViewDetails detalles={details} /> 
+        </div>
+
       </div>
       ):(
         <div>
@@ -84,7 +91,7 @@ function CallesDetails() {
         <p>Posicion del Aparcamiento: {details.positionMarker}</p>
         <div>
             <h3>Mapa</h3>
-            <MapView />
+            <MapViewDetails detalles={details} />
         </div>        
       </div>
       )

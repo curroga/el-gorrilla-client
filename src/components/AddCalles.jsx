@@ -1,17 +1,23 @@
 import React from 'react'
 import { useState } from 'react'
 import { createCallesService } from '../services/calles.service'
+//import MapView from '../components/MapView'
+import MapWithClickable from './MapWithClickable'
 
 
 function AddCalles(props) {
 
+  console.log(props)
+
   const [ nameInput, setNameInput] = useState("")
   const [ numAparcamientosInput, setNumAparcamientosInput] = useState(0)
-  const [ positionMarkerInput, setPositionMarkerInput] = useState([])
+  const [ positionMarkerInput, setPositionMarkerInput] = useState([37.17913079459059, -5.775956770000562 ])
+
+  console.log(positionMarkerInput)
 
   const handleNameChange = (e) => setNameInput(e.target.value)
   const handlenumAparcamientosChange = (e) => setNumAparcamientosInput(e.target.value)
-  const handlePositionMarkerChange = (e) => setPositionMarkerInput(e.target.value)
+  // const handlePositionMarkerChange = (e) => setPositionMarkerInput(e.target.value)
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -42,10 +48,11 @@ function AddCalles(props) {
         <label htmlFor="numAparcamientos">Nº Aparcamientos:</label>
         <input value={numAparcamientosInput} type="number" name='numAparcamientos' onChange={handlenumAparcamientosChange} />
         <br />
-
-        <label htmlFor="positionMarker">Posicion de la marca:</label>
-        <input checked={positionMarkerInput} type="number" name='positionMarker' onChange={handlePositionMarkerChange} />
-        <br />
+        
+        <div>
+          <h3>Mapa</h3>
+          <MapWithClickable detalles={props.detalles} posicionInicial={positionMarkerInput} />
+        </div>
 
         <button onClick={handleSubmit}>Agregar</button>
       </form>
