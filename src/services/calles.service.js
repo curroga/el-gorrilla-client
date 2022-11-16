@@ -21,10 +21,15 @@ const updateCallesService = (calleId, callesUpdate) => {
   return service.patch(`/calle/${calleId}`, callesUpdate)
 }
 
+const updateCochesEnCallesService = (calleId, cocheId) => {
+  return service.patch(`/calle/${calleId}/${cocheId}`)  
+}
+
 export {
   getAllCallesService,
   createCallesService,
   getCallesDetailsService,
   deleteCallesService,
-  updateCallesService
+  updateCallesService,
+  updateCochesEnCallesService
 }

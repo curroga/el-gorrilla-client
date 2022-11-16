@@ -24,7 +24,7 @@ function AddCars(props) {
       props.actualizarLista()
       
     } catch (error) {
-      
+      console.log(error)
     }
   }
 

@@ -9,7 +9,9 @@ function CallesEdit() {
 
   const [ nameInput, setNameInput] = useState("")
   const [ numAparcamientosInput, setNumAparcamientosInput] = useState(0)
-  const [ positionMarkerInput, setPositionMarkerInput] = useState(0) //! Preguntar
+  const [ numLibresInput, setNumLibresInput] = useState(0)
+  
+  //const [ positionMarkerInput, setPositionMarkerInput] = useState(0) //! Preguntar
 
   useEffect(() => {
     getData()     
@@ -21,7 +23,8 @@ function CallesEdit() {
       console.log(response.data)
       setNameInput(response.data.name)
       setNumAparcamientosInput(response.data.numAparcamientos)
-      setPositionMarkerInput(response.data.positionMarker)
+      setNumLibresInput(response.data.numLibres)
+      //setPositionMarkerInput(response.data.positionMarker)
 
     } catch (error) {
       console.log(error) 
@@ -31,15 +34,18 @@ function CallesEdit() {
 
   const nameChange = (e) => setNameInput(e.target.value)
   const numAparcamientosChange = (e) => setNumAparcamientosInput(e.target.value)
-  const positionMarkerChange = (e) => setPositionMarkerInput(e.target.value)
+  const numLibresChange = (e) => setNumLibresInput(e.target.value)
+  //const positionMarkerChange = (e) => setPositionMarkerInput(e.target.value)
 
   const handleUpdate = async (event)=>{
     event.preventDefault()
     try {
+      console.log(numLibresInput)
       const updateCalle = {
         name: nameInput,
         numAparcamientos: numAparcamientosInput,
-        positionMarker: positionMarkerInput
+        numLibres: numLibresInput
+        //positionMarker: positionMarkerInput
       }
 
       await updateCallesService(calleId, updateCalle)
@@ -65,9 +71,9 @@ function CallesEdit() {
         <input value={numAparcamientosInput} type="number" name='numAparcamientos' onChange={numAparcamientosChange} />
         <br />
 
-        <label htmlFor="positionMarker">Posicion de la marca:</label>
-        <input value={positionMarkerInput} type="number" name='positionMarker' onChange={positionMarkerChange} />
-        <br />
+        <label htmlFor="numLibres">Libres:</label>
+        <input value={numLibresInput} type="number" name='numLibres' onChange={numLibresChange} />
+        <br />         
 
         <button onClick={handleUpdate}>Editar Calle</button>
       </form>

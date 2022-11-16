@@ -7,6 +7,7 @@ import { ClimbingBoxLoader } from "react-spinners"
 import { AuthContext } from "../../context/auth.context"
 
 import MapViewDetails from '../../components/maps/MapViewDetails'
+import CarListNombre from '../../components/CarListNombre'
 
 function CallesDetails() {
 
@@ -17,7 +18,7 @@ function CallesDetails() {
 
   //1. crear el estado donde estaran los detalles 
   const [details, setDetails] = useState(null)
-  const [isFetching, setIsFetching] = useState(true)
+  const [isFetching, setIsFetching] = useState(true)  
 
   //2. buscar la informacion de la BD 
   useEffect(() => {
@@ -66,36 +67,41 @@ function CallesDetails() {
   return (
     <div>
       <h3>Detalles de la calle</h3>
-      {isAdminIn === true ? (
         <div>
           <div>
-            <h5>Nombre: {details.name}</h5>
-            <p>Nº de Aparcamientos: {details.numAparcamientos}</p>
-            <p>Estado del Aparcamiento: {details.estadoAparcamiento}</p>
-            <p>Posicion del Aparcamiento: {details.positionMarker}</p>
+             <h4>Calle: {details.name}</h4>
+             <p>Nº de Aparcamientos: {details.numAparcamientos}</p>
+             <p>Libres: {details.numLibres}</p>
+             <p>Ocupados: {(details.numAparcamientos)-(details.numLibres)}</p>
+             <p>Coches:</p>
+             {details.coches.map((eachCar) => {
+              return(
+                <ul key={eachCar._id}>
+                  <li>{eachCar.modelo}</li>
+                </ul>
+              ) 
+             })}             
+            {isAdminIn === true ? (
+             <div>
+               <button onClick={handleDelete}>Borrar</button>
+               <Link to={`/calles/${details._id}/edit`}>Ir a editar</Link>
+             </div>
 
-            <button onClick={handleDelete}>Borrar</button>
-            <Link to={`/calles/${details._id}/edit`}>Ir a editar</Link>
+            ): null}
+
           </div>
+
+          <div>
+            <h3>Listado de mis coches</h3>
+            <CarListNombre calleId={calleId} />
+          </div>
+
           <div>
             <h3>Mapa</h3>
             <MapViewDetails detalles={details} /> 
+          </div>      
+      
         </div>
-
-      </div>
-      ):(
-        <div>
-        <h5>Nombre: {details.name}</h5>
-        <p>Nº de Aparcamientos: {details.numAparcamientos}</p>
-        <p>Estado del Aparcamiento: {details.estadoAparcamiento}</p>
-        <p>Posicion del Aparcamiento: {details.positionMarker}</p>
-        <div>
-            <h3>Mapa</h3>
-            <MapViewDetails detalles={details} />
-        </div>        
-      </div>
-      )
-      }
     </div>
   )
 }
