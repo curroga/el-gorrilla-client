@@ -3,9 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { getAllCarsService } from '../services/cars.service'
 
 import { ClimbingBoxLoader } from "react-spinners"
-import { updateCochesEnCallesService } from '../services/calles.service'
+import { updateCochesEnCallesService, deleteCochesEnCallesService } from '../services/calles.service'
 
-function CarListNombre( {calleId} ) {  
+import { useNavigate } from 'react-router-dom'
+
+function CarListNombre( {calleId, actualizar} ) { 
+  
+  const navigate = useNavigate()
 
   //1. creamos el estado que almacena la data de la API
   const [list, setList] = useState([])
@@ -27,6 +31,7 @@ function CarListNombre( {calleId} ) {
 
     } catch (error) {
       console.log(error)
+      navigate("/error")
     }
   }
 
@@ -43,13 +48,31 @@ function CarListNombre( {calleId} ) {
   }
 
   const handleAparcar = async (cocheId) => {
-    console.log("Aqui mi id del coche", cocheId)
-    console.log("Aqui mi id de la calle", calleId)
+    
+    console.log("Aqui mi id del coche para aparcar", cocheId)
+    console.log("Aqui mi id de la calle para aparcar", calleId)
     
     try {
       await updateCochesEnCallesService(calleId, cocheId)
+      
+      actualizar()
     } catch (error) {
       console.log(error)
+      navigate("/error")
+    }
+
+  }
+  const handleQuitar = async (cocheId) => {
+    console.log("Aqui mi id del coche para quitar coche", cocheId)
+    console.log("Aqui mi id de la calle para quitar coche", calleId)
+    
+    try {
+      await deleteCochesEnCallesService(calleId, cocheId)
+      navigate(`/calles/${calleId}/details`) 
+      actualizar()
+    } catch (error) {
+      console.log(error)
+      navigate("/error")
     }
 
   }
@@ -58,6 +81,14 @@ function CarListNombre( {calleId} ) {
   return (
     <div>      
       <div className="infoCarsListContainer">
+
+      {list.map((eachCar) => (
+          <div key={eachCar._id}>
+            <span>
+              {eachCar.modelo}
+            </span>            
+          </div>
+        ))}
         
         {list.map((eachCar) => (
           <div key={eachCar._id}>
@@ -65,7 +96,7 @@ function CarListNombre( {calleId} ) {
               {eachCar.modelo}
             </span>
             <button onClick={() => handleAparcar(eachCar._id)} >Aparcar</button>
-            <button>Dejar Aparcamiento</button>
+            <button onClick={() => handleQuitar(eachCar._id)}>Dejar Aparcamiento</button>
           </div>
         ))}
       </div>

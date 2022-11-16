@@ -24,6 +24,9 @@ const updateCallesService = (calleId, callesUpdate) => {
 const updateCochesEnCallesService = (calleId, cocheId) => {
   return service.patch(`/calle/${calleId}/${cocheId}`)  
 }
+const deleteCochesEnCallesService = (calleId, cocheId) => {
+  return service.patch(`/calle/delete/${calleId}/${cocheId}`)  
+}
 
 export {
   getAllCallesService,
@@ -31,5 +34,6 @@ export {
   getCallesDetailsService,
   deleteCallesService,
   updateCallesService,
-  updateCochesEnCallesService
+  updateCochesEnCallesService,
+  deleteCochesEnCallesService
 }

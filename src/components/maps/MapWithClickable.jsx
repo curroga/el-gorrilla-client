@@ -62,7 +62,7 @@ function MapWithClickable( { detalles, posicionInicial, updatePosition } ) {
           return (
            <Marker key={eachMarker._id} position={eachMarker.positionMarker}>
              <Popup>
-               Aparcamiento: <br /> Libre.
+               Calle: {eachMarker.name}
              </Popup>
            </Marker>             
           )

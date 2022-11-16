@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from "leaflet"
 import 'leaflet/dist/leaflet.css'
 import "../../styles/mapa.css"
+
+import { AuthContext } from "../../context/auth.context"
 
 
 let DefaultIcon = L.icon({
@@ -12,9 +14,9 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon
 
 function MapView( {detalles} ) {
-  console.log(detalles)
-  //const positionMapContainer = [37.17913079459059, -5.775956770000562]
-  //const positionMarker = [37.17913079459059, -5.775956770000562]
+
+  const { user } = useContext(AuthContext)
+   
   return (
     <div className="container-map">      
       <div>
@@ -25,7 +27,16 @@ function MapView( {detalles} ) {
         />        
         <Marker position={detalles.positionMarker}>
           <Popup>
-           Aparcamiento: <br /> {detalles.estadoAparcamiento}.
+           Nº de aparcamintos: {detalles.numAparcamientos} <br />
+           Plazas Libres: {(detalles.numAparcamientos)-(detalles.coches.length)-(detalles.numOcupados)} <br />
+           Coches:
+           {detalles.coches.map((eachCar) => {
+             return(
+               <ul key={eachCar._id}>
+                 {eachCar.owner === user._id ? <li>{eachCar.modelo}</li> : null }                    
+               </ul>
+             ) 
+            })} 
          </Popup>
        </Marker>             
           

@@ -11,7 +11,7 @@ import CarListNombre from '../../components/CarListNombre'
 
 function CallesDetails() {
 
-  const { isAdminIn } = useContext(AuthContext)
+  const { isAdminIn, user } = useContext(AuthContext)
 
   const { calleId } = useParams()
   const navigate = useNavigate()
@@ -19,6 +19,9 @@ function CallesDetails() {
   //1. crear el estado donde estaran los detalles 
   const [details, setDetails] = useState(null)
   const [isFetching, setIsFetching] = useState(true)  
+
+  //console.log("detalles del owner", details.coches[0].owner)
+  console.log("detalles del user", user._id)
 
   //2. buscar la informacion de la BD 
   useEffect(() => {
@@ -66,21 +69,26 @@ function CallesDetails() {
 
   return (
     <div>
-      <h3>Detalles de la calle</h3>
-        <div>
+      
+        
           <div>
-             <h4>Calle: {details.name}</h4>
-             <p>Nº de Aparcamientos: {details.numAparcamientos}</p>
-             <p>Libres: {details.numLibres}</p>
-             <p>Ocupados: {(details.numAparcamientos)-(details.numLibres)}</p>
-             <p>Coches:</p>
-             {details.coches.map((eachCar) => {
-              return(
-                <ul key={eachCar._id}>
-                  <li>{eachCar.modelo}</li>
-                </ul>
-              ) 
-             })}             
+             <h3>Calle: {details.name}</h3>
+             {isAdminIn === true ? (
+              <div>
+               <p>Numero de coches: {details.coches.length}</p>
+               <p>Los coches de esta calle:</p>
+               <p>Ocupados por el admin: {details.numOcupados}</p>
+               {details.coches.map((eachCar) => {
+                return(
+                  <ul key={eachCar._id}>
+                    <li>{eachCar.modelo}</li>
+                  </ul>
+                ) 
+               })}
+               </div>            
+
+             ): null}
+
             {isAdminIn === true ? (
              <div>
                <button onClick={handleDelete}>Borrar</button>
@@ -90,18 +98,20 @@ function CallesDetails() {
             ): null}
 
           </div>
-
+          
           <div>
-            <h3>Listado de mis coches</h3>
-            <CarListNombre calleId={calleId} />
+            <h3>Mis coches</h3>
+            <CarListNombre calleId={calleId} actualizar={getData} />
           </div>
+
+          <hr />
 
           <div>
             <h3>Mapa</h3>
             <MapViewDetails detalles={details} /> 
           </div>      
       
-        </div>
+        
     </div>
   )
 }
