@@ -28,6 +28,18 @@ const deleteCochesEnCallesService = (calleId, cocheId) => {
   return service.patch(`/calle/delete/${calleId}/${cocheId}`)  
 }
 
+const getCallesFavoritas = () => {
+  return service.get("/calle/favoritos")
+}
+
+const updateCallesFavoritasService = (calleId) => {
+  return service.patch(`/calle/favoritos-update/${calleId}`)
+}
+
+const deleteCallesFavoritasService = (calleId) => {
+  return service.patch(`/calle/favoritos-delete/${calleId}`)
+}
+
 export {
   getAllCallesService,
   createCallesService,
@@ -35,5 +47,8 @@ export {
   deleteCallesService,
   updateCallesService,
   updateCochesEnCallesService,
-  deleteCochesEnCallesService
+  deleteCochesEnCallesService,
+  getCallesFavoritas,
+  updateCallesFavoritasService,
+  deleteCallesFavoritasService
 }

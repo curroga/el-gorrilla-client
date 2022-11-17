@@ -93,7 +93,7 @@ function CarList() {
       { mostrarAddCars === true ? <AddCars actualizarLista={getData} /> :null}
       </div>
       <div className="infoCarsContainer">
-        <h3>Tus coches</h3>
+        <h2>Mis coches</h2>
         {list.map((eachCar) => (
           <InfoCard key={eachCar._id} item={eachCar} onUpdate={handleUpdate} onDelete={handleDelete} />
         ))}

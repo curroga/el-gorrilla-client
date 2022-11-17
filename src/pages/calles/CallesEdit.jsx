@@ -9,7 +9,7 @@ function CallesEdit() {
 
   const [ nameInput, setNameInput] = useState("")
   const [ numAparcamientosInput, setNumAparcamientosInput] = useState(0)
-  const [ numLibresInput, setNumLibresInput] = useState(0)
+  const [ numOcupadosInput, setNumOcupadosInput] = useState(0)
   
   //const [ positionMarkerInput, setPositionMarkerInput] = useState(0) //! Preguntar
 
@@ -23,7 +23,7 @@ function CallesEdit() {
       console.log(response.data)
       setNameInput(response.data.name)
       setNumAparcamientosInput(response.data.numAparcamientos)
-      setNumLibresInput(response.data.numLibres)
+      setNumOcupadosInput(response.data.numOcupados)
       //setPositionMarkerInput(response.data.positionMarker)
 
     } catch (error) {
@@ -34,17 +34,17 @@ function CallesEdit() {
 
   const nameChange = (e) => setNameInput(e.target.value)
   const numAparcamientosChange = (e) => setNumAparcamientosInput(e.target.value)
-  const numLibresChange = (e) => setNumLibresInput(e.target.value)
+  const numOcupadosChange = (e) => setNumOcupadosInput(e.target.value)
   //const positionMarkerChange = (e) => setPositionMarkerInput(e.target.value)
 
   const handleUpdate = async (event)=>{
     event.preventDefault()
     try {
-      console.log(numLibresInput)
+      console.log(numOcupadosInput)
       const updateCalle = {
         name: nameInput,
         numAparcamientos: numAparcamientosInput,
-        numLibres: numLibresInput
+        numOcupados: numOcupadosInput
         //positionMarker: positionMarkerInput
       }
 
@@ -71,8 +71,8 @@ function CallesEdit() {
         <input value={numAparcamientosInput} type="number" name='numAparcamientos' onChange={numAparcamientosChange} />
         <br />
 
-        <label htmlFor="numLibres">Libres:</label>
-        <input value={numLibresInput} type="number" name='numLibres' onChange={numLibresChange} />
+        <label htmlFor="numOcupados">Ocupados:</label>
+        <input value={numOcupadosInput} type="number" name='numOcupados' onChange={numOcupadosChange} />
         <br />         
 
         <button onClick={handleUpdate}>Editar Calle</button>

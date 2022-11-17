@@ -1,12 +1,25 @@
-import React from 'react'
+import ListaFavoirtos from "../components/ListaFavoirtos"
+import CarList from "./cars/CarList"
 
 function Profile() {
-  // Podriamos hacer que este componente llame a una ruta de Be para traer el perfil del usuario
+  
+  
 
   return (
     <div>
+
+      <div>
+        <ListaFavoirtos />
+      </div>
+
+      <div>
+        <CarList />
+      </div>
       <h4>Este es tu perfil</h4>
-      <p>Informacion privada de un usuario</p>
+      <p>mostrar mis </p>
+      <p>boton que me mande a cambiar los datos del usario o la contraseña</p>      
+      <p>Lista de mis calles favoritas</p>
+      <p>mostar el componente coches  y meterle el boton de dejar el aparcamiento</p>
     </div>
   )
 }

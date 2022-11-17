@@ -82,23 +82,16 @@ function CarListNombre( {calleId, actualizar} ) {
     <div>      
       <div className="infoCarsListContainer">
 
-      {list.map((eachCar) => (
-          <div key={eachCar._id}>
-            <span>
-              {eachCar.modelo}
-            </span>            
-          </div>
-        ))}
-        
         {list.map((eachCar) => (
           <div key={eachCar._id}>
             <span>
-              {eachCar.modelo}
+             <strong>{eachCar.modelo}</strong> 
             </span>
             <button onClick={() => handleAparcar(eachCar._id)} >Aparcar</button>
             <button onClick={() => handleQuitar(eachCar._id)}>Dejar Aparcamiento</button>
           </div>
         ))}
+
       </div>
     </div>
   )
