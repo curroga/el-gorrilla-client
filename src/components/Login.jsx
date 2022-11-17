@@ -5,6 +5,11 @@ import { useNavigate } from "react-router-dom"
 import { useContext } from 'react'
 import { AuthContext } from "../context/auth.context";
 
+import { NavLink } from "react-router-dom";
+
+import "../styles/Home.css"
+
+
 function Login() {
 
   const { authenticaUser } = useContext(AuthContext)
@@ -57,29 +62,36 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="login-container">
 
-      <h1>Log In</h1>
-
+      <h1> Bienvenido a Gorrilla App</h1>
+      
       <form onSubmit={handleLogin}>
-        
+        <p>
       <label>User:</label>
         <input
+          className="input"
           type="text"
           name="username"
           value={username}
           onChange={handleUsernameChange}
         />
-       
+        </p>
+        <p>
         <label>Password:</label>
         <input
+          className="input"
           type="password"
           name="password"
           value={password}
           onChange={handlePasswordChange}
         />
+        </p>
 
-        <button type="submit">Login</button>
+        <p>
+        <button className="btn login-provider" type="submit">Login</button>
+        </p>
+        <NavLink style={{textDecoration: "none"}} to="/signup" ><button className="btn facebook-provider">Registrarse</button></NavLink>
         {errorMessage !== "" ? <p>{errorMessage}</p> : null}
       </form>
 

@@ -1,24 +1,16 @@
 import React from "react";
+import "../styles/Home.css";
 
-import Login from "../components/Login"
+import Login from "../components/Login";
 
 import { NavLink } from "react-router-dom";
 
 function Home() {
   return (
-    <div>
-      <div>
-        <h1>El Gorrilla</h1>
-      </div>
-
-      <div>
-        <div>
-          <Login />
-        </div>
-
-        <NavLink to="/signup" >
-          <button>Registrarse</button>
-        </NavLink>
+    <div className="form-container-body">
+      <div className="form-container">
+        <Login />
+        <div className="welcome-screen-container"></div>
       </div>
     </div>
   );
