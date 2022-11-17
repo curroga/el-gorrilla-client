@@ -4,7 +4,6 @@ import IsPrivate from './components/IsPrivate';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
-import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Error from './pages/errores/Error';
 import NotFound from './pages/errores/NotFound';
@@ -22,8 +21,7 @@ function App() {
       
       <Routes>
         <Route path='/' element={ <Home /> } />
-        <Route path='/signup' element={ <Signup /> } />
-        <Route path='/login' element={ <Login /> } />
+        <Route path='/signup' element={ <Signup /> } />        
 
         {/* paginas privadas */}
         <Route path='/profile' element={ <IsPrivate> <Profile /> </IsPrivate>} />

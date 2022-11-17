@@ -76,8 +76,9 @@ function CallesDetails() {
              {isAdminIn === true ? (
               <div>
                <p>Numero de coches: {details.coches.length}</p>
+               <p>Aparcamientos agregados por el admin: {details.numOcupados}</p>
+               <p>Aparcamientos liberados por el admin: {details.numLibres}</p>
                <p>Los coches de esta calle:</p>
-               <p>Ocupados por el admin: {details.numOcupados}</p>
                {details.coches.map((eachCar) => {
                 return(
                   <ul key={eachCar._id}>

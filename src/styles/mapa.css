@@ -12,3 +12,9 @@
   "mapa" ;
   margin: 0 25vw;
 }
+.container-map-withDrag{
+
+  width: 400px;
+  height: 400px;  
+
+}

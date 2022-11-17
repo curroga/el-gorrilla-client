@@ -29,7 +29,7 @@ function MapView( {detalles} ) {
              <Popup>
                Calle: {eachMarker.name} <br />
                Nº de aparcamintos: {eachMarker.numAparcamientos} <br />
-               Plazas Libres: {(eachMarker.numAparcamientos)-(eachMarker.coches.length)-(eachMarker.numOcupados)} <br />
+               Plazas Libres: {(eachMarker.numAparcamientos)-(eachMarker.coches.length)-(eachMarker.numOcupados)+(eachMarker.numLibres)} <br />
              </Popup>
            </Marker>             
           )

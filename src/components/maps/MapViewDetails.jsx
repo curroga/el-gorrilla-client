@@ -28,7 +28,7 @@ function MapView( {detalles} ) {
         <Marker position={detalles.positionMarker}>
           <Popup>
            Nº de aparcamintos: {detalles.numAparcamientos} <br />
-           Plazas Libres: {(detalles.numAparcamientos)-(detalles.coches.length)-(detalles.numOcupados)} <br />
+           Plazas Libres: {(detalles.numAparcamientos)-(detalles.coches.length)-(detalles.numOcupados)+(detalles.numLibres)} <br />
            Coches:
            {detalles.coches.map((eachCar) => {
              return(
