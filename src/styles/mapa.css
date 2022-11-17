@@ -6,10 +6,7 @@
   grid-area: mapa;    
   
 }
-.container-map {
-  display: grid;
-  grid-template-areas:
-  "mapa" ;
+.container-map {  
   margin: 0 25vw;
 }
 .container-map-withDrag{

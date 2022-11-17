@@ -44,7 +44,7 @@ function MapWithClickable( { detalles, posicionInicial, updatePosition } ) {
     setCenter(clickedPosition)
   }, [clickedPosition])
   return (
-    <div className="container-map">      
+    <div>      
       <div>
       <MapContainer center={center} zoom={15} scrollWheelZoom={true} className="mapa">
         <TileLayer

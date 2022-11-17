@@ -3,8 +3,6 @@ import "../styles/Home.css";
 
 import Login from "../components/Login";
 
-import { NavLink } from "react-router-dom";
-
 function Home() {
   return (
     <div className="form-container-body">

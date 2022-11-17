@@ -5,6 +5,9 @@ import { getCallesFavoritas } from '../../services/calles.service'
 import { ClimbingBoxLoader } from "react-spinners"
 import { Link } from 'react-router-dom'
 
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+
 function ListaFavoirtos() {
 
   const { user } = useContext(AuthContext)
@@ -39,16 +42,20 @@ function ListaFavoirtos() {
     )
   }
   return (
-    <div>
-      <h2>Lista de Calles favoritas</h2>
+    <Card style={{ width: "18rem" }}>
+      <Card.Header style={{ backgroundColor: "#68ec57", color:"rgb(87, 87, 240)", fontWeight: "bold"}}>Lista de Calles favoritas</Card.Header>
+      <ListGroup variant="flush">
       {listaFavorita.map((eachCalle) => {
         return (
-          <Link key={eachCalle._id} to={`/calles/${eachCalle._id}/details`} >
-            <p>{eachCalle.name}</p>
+          <ListGroup.Item key={eachCalle._id} style={{ backgroundColor:"white"}}>
+          <Link style={{ textDecoration: "none", color:"rgb(87, 87, 240)"}}  to={`/calles/${eachCalle._id}/details`} >
+            {eachCalle.name}
           </Link>
+          </ListGroup.Item>
         )
       })}
-    </div>
+      </ListGroup>
+    </Card>
   )
 }
 

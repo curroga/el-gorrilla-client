@@ -16,7 +16,7 @@ function MapView( {detalles} ) {
   //const positionMapContainer = [37.17913079459059, -5.775956770000562]
   //const positionMarker = [37.17913079459059, -5.775956770000562]
   return (
-    <div className="container-map">      
+    <div>      
       <div>
       <MapContainer center={[37.17913079459059, -5.775956770000562]} zoom={15} scrollWheelZoom={true} className="mapa">
         <TileLayer

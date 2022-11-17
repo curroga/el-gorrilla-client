@@ -5,6 +5,9 @@ import { updateCarsService, deleteCarsService, getAllCarsService } from '../../s
 import { useNavigate } from 'react-router-dom'
 import { ClimbingBoxLoader } from "react-spinners"
 
+import Button from 'react-bootstrap/Button';
+
+
 
 
 function CarList() { 
@@ -89,14 +92,14 @@ function CarList() {
   return (
     <div>
       <div>
-        <button onClick={handleClick}>Añadir coche</button>
       { mostrarAddCars === true ? <AddCars actualizarLista={getData} /> :null}
       </div>
       <div className="infoCarsContainer">
         <h2>Mis coches</h2>
         {list.map((eachCar) => (
           <InfoCard key={eachCar._id} item={eachCar} onUpdate={handleUpdate} onDelete={handleDelete} />
-        ))}
+          ))}
+          <Button variant="primary" onClick={handleClick}>Añadir coches</Button>
       </div>
     </div>
   )

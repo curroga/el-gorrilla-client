@@ -1,0 +1,19 @@
+.profile-container-body{
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+
+  display: flex; 
+  justify-content: space-evenly;
+  flex-Wrap:wrap;  
+
+  height: 100vh;
+
+  
+  background: url(../../public/fondo-mapa.jpg) no-repeat center center fixed;
+  background-size: cover;
+  
+
+  color: rgb(87, 87, 240);
+
+}

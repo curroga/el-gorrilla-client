@@ -7,6 +7,9 @@ import MapWithDrag from '../../components/maps/MapWithDrag'
 
 import { ClimbingBoxLoader } from "react-spinners"
 
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
 
 function CallesEdit() {
  
@@ -85,31 +88,34 @@ function CallesEdit() {
 
 
   return (
-    <div>
-      <h3>Edita la calle</h3>
+    <div className='calles-container-body'>
 
-      <form>
-        <label htmlFor="name">Nombre:</label>
-        <input value={nameInput} type="text" name='name' onChange={nameChange} />
-        <br />
+      <Form style={{color: "blue"}}>
+        <h3>Edita la calle</h3>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label >Nombre:</Form.Label>
+        <Form.Control value={nameInput} type="text" name='name' onChange={nameChange} />
+        </Form.Group>
 
-        <label htmlFor="numAparcamientos">Nº Aparcamientos:</label>
-        <input value={numAparcamientosInput} type="number" name='numAparcamientos' onChange={numAparcamientosChange} />
-        <br />
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label >Nº Aparcamientos:</Form.Label>
+        <Form.Control value={numAparcamientosInput} type="number" name='numAparcamientos' onChange={numAparcamientosChange} />
+        </Form.Group>
 
-        <label htmlFor="numOcupados">Aparcamientos agregados por el admin:</label>
-        <input value={numOcupadosInput} type="number" name='numOcupados' onChange={numOcupadosChange} />
-        <br />
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label >Aparcamientos agregados por el admin:</Form.Label>
+        <Form.Control value={numOcupadosInput} type="number" name='numOcupados' onChange={numOcupadosChange} />
+        </Form.Group>
 
-        <label htmlFor="numLibres">Aparcamientos liberados por el admin:</label>
-        <input value={numLibresInput} type="number" name='numLibres' onChange={numLibresChange} />
-        <br />
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label >Aparcamientos liberados por el admin:</Form.Label>
+        <Form.Control value={numLibresInput} type="number" name='numLibres' onChange={numLibresChange} />
+        </Form.Group>
 
-        <button onClick={handleUpdate}>Editar Calle</button>
+        <Button variant="outline-success" onClick={handleUpdate}>Editar Calle</Button>
 
-      </form>
-      <div>
-        <h3>Mapa</h3>
+      </Form>
+      <div>        
         <MapWithDrag coordinates={coordinates} setCoordinates={setCoordinates} />  
       </div>
     </div>

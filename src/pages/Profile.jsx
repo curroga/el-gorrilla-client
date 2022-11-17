@@ -1,5 +1,6 @@
 import ListaFavoirtos from "../components/calles/ListaFavoirtos"
 import CarList from "../components/cars/CarList"
+import "../styles/profile.css"
 
 import { useContext } from "react"
 import { AuthContext } from '../context/auth.context'
@@ -13,15 +14,15 @@ function Profile() {
   
 
   return (
-    <div>
-
+    <div className="profile-container-body">
+      
+      <div>
       <h2>Bievenido a tu perfil {user.username}</h2>
+      </div>
 
       <div>
         <ListaFavoirtos />
-      </div>
-
-      <hr />
+      </div>     
 
       <div>
         <CarList />

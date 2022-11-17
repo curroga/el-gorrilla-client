@@ -7,6 +7,11 @@ import { AuthContext } from "../../context/auth.context"
 import Search from '../../components/calles/Search'
 import MapView from '../../components/maps/MapView'
 
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+
+import Button from 'react-bootstrap/Button';
+
 function CallesList() {
 
   const { isAdminIn } = useContext(AuthContext)
@@ -63,35 +68,37 @@ function CallesList() {
 
   //5. renderizar la data
   return (
-    <div>
+    <div className='calles-container-body'>
      
       <div>
         { isAdminIn === true ? (
 
-          <div>
-            <button onClick={handleClick}>Añadir calle</button>
+          <div style={{margin: "50px 50px 50px 75px"}}>
+            <Button variant="outline-primary" onClick={handleClick}>Añadir calle</Button>
           { mostrarAddCalles === true ? <AddCalles actualizarLista={getData} detalles={filterList} /> :null}
           </div>
 
           ) : null}
 
-          <div>
+          <div style={{margin: "50px 50px 50px 30px"}}>
             <Search filterCalles={filterCalles} />
           </div>
 
-          <div>
-            <h3>Listado de calles</h3>        
+          <Card style={{ width: "18rem" }}>
+          <Card.Header style={{ backgroundColor: "#68ec57", color:"rgb(87, 87, 240)", fontWeight: "bold" }}>Lista de Calles</Card.Header> 
+          <ListGroup variant="flush">      
              {filterList.map((eachCalle) => {
                return (
-                 <p key={eachCalle._id}>
-                   <Link to={`/calles/${eachCalle._id}/details`}>{eachCalle.name}</Link>
-                 </p>
+                 <ListGroup.Item key={eachCalle._id} style={{ backgroundColor:"white"}}>
+                   <Link style={{ textDecoration: "none", color:"rgb(87, 87, 240)"}} to={`/calles/${eachCalle._id}/details`}>{eachCalle.name}</Link>
+                 </ListGroup.Item>
               )  
            })}
-          </div>
+           </ListGroup> 
+          </Card>
 
-         <div>
-          <button onClick={handleClickMapa}>mapa</button>
+         <div style={{margin: "50px 50px 50px 100px"}}>
+          <Button variant="outline-primary" onClick={handleClickMapa}>mapa</Button>
           { mostrarMapa === true ? <MapView detalles={filterList} /> :null}          
         </div>
 

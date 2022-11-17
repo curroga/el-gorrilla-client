@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
 
 function InfoCard({ item, onUpdate, onDelete }) {
   const [isEdit, setIsEdit] = useState(false)
@@ -50,14 +53,19 @@ function InfoCard({ item, onUpdate, onDelete }) {
     );
   }
   function InfoElement(){
-    return <div>
-    <h3>Modelo: {item.modelo}</h3>
-    <p>Color: {item.color}</p>
-    <p>Matricula: {item.matricula}</p>
-
-    <button onClick={() => setIsEdit(true)}>Editar</button>
-    <button onClick={(e) => onDelete(item._id) }>Borrar</button>
-  </div>
+    return (
+    <Card style={{ width: '18rem', margin:"10px" }}>
+      <ListGroup variant="flush">
+        <ListGroup.Item style={{ backgroundColor: "rgb(87, 87, 240)", color: "white" }}>Modelo: {item.modelo}</ListGroup.Item>
+        <ListGroup.Item style={{ width: '18rem' }}>Color: {item.color}</ListGroup.Item>
+        <ListGroup.Item style={{ width: '18rem' }}>Matricula: {item.matricula}</ListGroup.Item>
+      </ListGroup>
+      <Card.Body style={{ display: "flex", justifyContent: "space-evenly" }}>
+        <Button variant="success" onClick={() => setIsEdit(true)}>Editar</Button>
+        <Button variant="danger" onClick={(e) => onDelete(item._id) }>Borrar</Button>
+      </Card.Body>
+  </Card>
+    )
   }
 
   return <div>{isEdit ? <FormEdit /> : <InfoElement />}</div>    

@@ -7,6 +7,10 @@ import { updateCochesEnCallesService, deleteCochesEnCallesService } from '../../
 
 import { useNavigate } from 'react-router-dom'
 
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
+
 function CarListNombre( {calleId, actualizar} ) { 
   
   const navigate = useNavigate()
@@ -79,21 +83,22 @@ function CarListNombre( {calleId, actualizar} ) {
 
   //5. renderizamos
   return (
-    <div>      
-      <div className="infoCarsListContainer">
+    <Card style={{ width: "22rem" }}>      
+      
+      <Card.Header style={{ backgroundColor: "#68ec57", color:"rgb(87, 87, 240)", fontWeight: "bold"}}>Mis Coches</Card.Header>
 
         {list.map((eachCar) => (
-          <div key={eachCar._id}>
-            <span>
+          <ListGroup variant="flush" key={eachCar._id}>
+            <ListGroup.Item style={{ backgroundColor: "rgb(87, 87, 240)", color: "white" }}>
              <strong>{eachCar.modelo}</strong> 
-            </span>
-            <button onClick={() => handleAparcar(eachCar._id)} >Aparcar</button>
-            <button onClick={() => handleQuitar(eachCar._id)}>Dejar Aparcamiento</button>
-          </div>
+            </ListGroup.Item>
+            <Button variant="outline-danger" onClick={() => handleAparcar(eachCar._id)} >Aparcar</Button>
+            <Button variant="outline-success" onClick={() => handleQuitar(eachCar._id)}>Dejar Aparcamiento</Button>
+          </ListGroup>
         ))}
 
-      </div>
-    </div>
+      
+    </Card>
   )
 }
   
