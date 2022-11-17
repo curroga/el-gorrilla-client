@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import AddCars from '../../components/AddCars'
-import InfoCard from '../../components/InfoCard'
+import AddCars from './AddCars'
+import InfoCard from './InfoCard'
 import { updateCarsService, deleteCarsService, getAllCarsService } from '../../services/cars.service'
 import { useNavigate } from 'react-router-dom'
 import { ClimbingBoxLoader } from "react-spinners"

@@ -1,25 +1,32 @@
-import ListaFavoirtos from "../components/ListaFavoirtos"
-import CarList from "./cars/CarList"
+import ListaFavoirtos from "../components/calles/ListaFavoirtos"
+import CarList from "../components/cars/CarList"
 
-function Profile() {
-  
+import { useContext } from "react"
+import { AuthContext } from '../context/auth.context'
+
+
+function Profile() {  
+
+  const { user } = useContext(AuthContext)
+
+  console.log(user)
   
 
   return (
     <div>
 
+      <h2>Bievenido a tu perfil {user.username}</h2>
+
       <div>
         <ListaFavoirtos />
       </div>
 
+      <hr />
+
       <div>
         <CarList />
-      </div>
-      <h4>Este es tu perfil</h4>
-      <p>mostrar mis </p>
-      <p>boton que me mande a cambiar los datos del usario o la contraseña</p>      
-      <p>Lista de mis calles favoritas</p>
-      <p>mostar el componente coches  y meterle el boton de dejar el aparcamiento</p>
+      </div>    
+      
     </div>
   )
 }

@@ -7,7 +7,7 @@ import { ClimbingBoxLoader } from "react-spinners"
 import { AuthContext } from "../../context/auth.context"
 
 import MapViewDetails from '../../components/maps/MapViewDetails'
-import CarListNombre from '../../components/CarListNombre'
+import CarListNombre from '../../components/cars/CarListNombre'
 
 function CallesDetails() {
 

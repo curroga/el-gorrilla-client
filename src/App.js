@@ -11,7 +11,7 @@ import NotFound from './pages/errores/NotFound';
 import CallesList from './pages/calles/CallesList';
 import CallesDetails from './pages/calles/CallesDetails';
 import CallesEdit from './pages/calles/CallesEdit';
-import CarList from './pages/cars/CarList';
+import CarList from './components/cars/CarList';
 
 
 function App() {

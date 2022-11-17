@@ -36,13 +36,14 @@ function InfoCard({ item, onUpdate, onDelete }) {
         <input type="text" name='modelo' onChange={handleModeloChange} value={modeloInput} />
         <br />
 
+        <label htmlFor="color">Color:</label>
+        <input type="text" name='color' onChange={handleColor} value={colorInput} />
+        <br />
+        
         <label htmlFor="matricula">Matricula:</label>
         <input type="text" name='matricula' onChange={handleMatricula} value={matriculaInput} />
         <br />
         
-        <label htmlFor="color">Color:</label>
-        <input type="text" name='color' onChange={handleColor} value={colorInput} />
-        <br />
 
         <button onClick={handleClickUpdateCar}>Actualizar</button>
     </form>

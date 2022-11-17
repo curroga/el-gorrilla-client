@@ -38,9 +38,9 @@ function Navbar() {
           <NavLink to="/calles" className={asignClassName}>
             <button>Calles</button>
             </NavLink>
-            <NavLink to="/cars" className={asignClassName}>
+            {/* <NavLink to="/cars" className={asignClassName}>
             <button>Coches</button>
-            </NavLink>          
+            </NavLink>           */}
             <div className='nav-inactive'>
               <button onClick={handleLogout}>Cerrar Sesion</button>
             </div>
@@ -50,12 +50,12 @@ function Navbar() {
           <NavLink to="/" className={asignClassName}>
             <button>Home</button>
             </NavLink>
-          <NavLink to="/signup" className={asignClassName}>
+          {/* <NavLink to="/signup" className={asignClassName}>
             <button>Registrarse</button>
             </NavLink>
           <NavLink to="/login" className={asignClassName}>
             <button>Acceder</button>
-            </NavLink>
+            </NavLink> */}
         </div>
       )
     }

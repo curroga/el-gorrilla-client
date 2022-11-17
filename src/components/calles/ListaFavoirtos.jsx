@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { AuthContext } from '../context/auth.context'
-import { getCallesFavoritas } from '../services/calles.service'
+import { AuthContext } from '../../context/auth.context'
+import { getCallesFavoritas } from '../../services/calles.service'
 
 import { ClimbingBoxLoader } from "react-spinners"
 import { Link } from 'react-router-dom'

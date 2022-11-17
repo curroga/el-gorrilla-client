@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react'
-import AddCalles from '../../components/AddCalles'
+import AddCalles from '../../components/calles/AddCalles'
 import { Link } from 'react-router-dom'
 import { getAllCallesService } from '../../services/calles.service'
 import { ClimbingBoxLoader } from "react-spinners"
 import { AuthContext } from "../../context/auth.context"
-import Search from '../../components/Search'
+import Search from '../../components/calles/Search'
 import MapView from '../../components/maps/MapView'
 
 function CallesList() {

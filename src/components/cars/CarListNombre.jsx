@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
-import { getAllCarsService } from '../services/cars.service'
+import { getAllCarsService } from '../../services/cars.service'
 
 import { ClimbingBoxLoader } from "react-spinners"
-import { updateCochesEnCallesService, deleteCochesEnCallesService } from '../services/calles.service'
+import { updateCochesEnCallesService, deleteCochesEnCallesService } from '../../services/calles.service'
 
 import { useNavigate } from 'react-router-dom'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
-import { createCallesService } from '../services/calles.service'
-import MapWithClickable from './maps/MapWithClickable'
+import { createCallesService } from '../../services/calles.service'
+import MapWithClickable from '../maps/MapWithClickable'
 
 
 function AddCalles(props) {
