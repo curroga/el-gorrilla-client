@@ -1,23 +1,6 @@
 .App {
   /* text-align: center; */
 }
-.nav{
-  display: flex;
-  justify-content: center;
-  background-color: #1b1b32;
-  
-}
-
-.nav-active button {
-  background-color: rgb(196, 91, 91); 
-  margin: 20px; 
-  border-radius: 20px;
-}
-.nav-inactive button {
-  background-color: rgb(87, 87, 240);  
-  margin: 20px; 
-  border-radius: 20px;
-}
 .spinner {
   display: flex;
   justify-content: center;

@@ -6,11 +6,7 @@ import { ClimbingBoxLoader } from "react-spinners"
 import { AuthContext } from "../../context/auth.context"
 import Search from '../../components/calles/Search'
 import MapView from '../../components/maps/MapView'
-
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
-
-import Button from 'react-bootstrap/Button';
+import '../../styles/calles.css'
 
 function CallesList() {
 
@@ -68,42 +64,126 @@ function CallesList() {
 
   //5. renderizar la data
   return (
-    <div className='calles-container-body'>
-     
-      <div>
-        { isAdminIn === true ? (
-
-          <div style={{margin: "50px 50px 50px 75px"}}>
-            <Button variant="outline-primary" onClick={handleClick}>Añadir calle</Button>
-          { mostrarAddCalles === true ? <AddCalles actualizarLista={getData} detalles={filterList} /> :null}
+    <div className='calles-container'>
+      <div className='calles-header'>
+        <div className='header-content'>
+          <div className='title-section'>
+            <h1 className='page-title'>🛣️ Gestión de Calles</h1>
+            <p className='page-subtitle'>Administra y visualiza todas las calles disponibles</p>
           </div>
+          
+          <div className='header-actions'>
+            {isAdminIn === true && (
+              <button className='add-street-btn' onClick={handleClick}>
+                <span className='btn-icon'>➕</span>
+                Añadir Calle
+              </button>
+            )}
+            
+            <button 
+              className={`map-toggle-btn ${mostrarMapa ? 'active' : ''}`}
+              onClick={handleClickMapa}
+            >
+              <span className='btn-icon'>🗺️</span>
+              {mostrarMapa ? 'Ocultar Mapa' : 'Ver Mapa'}
+            </button>
+          </div>
+        </div>
+      </div>
 
-          ) : null}
+      {mostrarAddCalles && (
+        <div className='add-calles-modal'>
+          <div className='modal-content'>
+            <button className='close-modal' onClick={() => setMostrarAddCalles(false)}>
+              ✕
+            </button>
+            <AddCalles actualizarLista={getData} detalles={filterList} />
+          </div>
+        </div>
+      )}
 
-          <div style={{margin: "50px 50px 50px 30px"}}>
+      <div className='calles-content'>
+        <div className='sidebar'>
+          <div className='search-section'>
             <Search filterCalles={filterCalles} />
           </div>
-
-          <Card style={{ width: "18rem" }}>
-          <Card.Header style={{ backgroundColor: "#68ec57", color:"rgb(87, 87, 240)", fontWeight: "bold" }}>Lista de Calles</Card.Header> 
-          <ListGroup variant="flush">      
-             {filterList.map((eachCalle) => {
-               return (
-                 <ListGroup.Item key={eachCalle._id} style={{ backgroundColor:"white"}}>
-                   <Link style={{ textDecoration: "none", color:"rgb(87, 87, 240)"}} to={`/calles/${eachCalle._id}/details`}>{eachCalle.name}</Link>
-                 </ListGroup.Item>
-              )  
-           })}
-           </ListGroup> 
-          </Card>
-
-         <div style={{margin: "50px 50px 50px 100px"}}>
-          <Button variant="outline-primary" onClick={handleClickMapa}>mapa</Button>
-          { mostrarMapa === true ? <MapView detalles={filterList} /> :null}          
+          
+          <div className='calles-list-container'>
+            <div className='list-header'>
+              <h3>📍 Lista de Calles</h3>
+              <span className='count-badge'>{filterList.length} calles</span>
+            </div>
+            
+            <div className='calles-grid'>
+              {filterList.map((eachCalle) => {
+                const plazasLibres = (eachCalle.numAparcamientos || 0) - 
+                  (eachCalle.coches?.length || 0) - 
+                  (eachCalle.numOcupados || 0) + 
+                  (eachCalle.numLibres || 0);
+                
+                return (
+                  <Link key={eachCalle._id} to={`/calles/${eachCalle._id}/details`} className='calle-card'>
+                    <div className='card-header'>
+                      <h4 className='calle-name'>{eachCalle.name}</h4>
+                      <div className='availability-indicator'>
+                        <div className={`status-dot ${plazasLibres > 0 ? 'available' : 'full'}`}></div>
+                        <span className='status-text'>
+                          {plazasLibres > 0 ? 'Disponible' : 'Completo'}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div className='card-stats'>
+                      <div className='stat'>
+                        <span className='stat-icon'>🚗</span>
+                        <span className='stat-value'>{eachCalle.numAparcamientos || 0}</span>
+                        <span className='stat-label'>Total plazas</span>
+                      </div>
+                      
+                      <div className='stat'>
+                        <span className='stat-icon'>✅</span>
+                        <span className='stat-value'>{plazasLibres}</span>
+                        <span className='stat-label'>Libres</span>
+                      </div>
+                      
+                      <div className='stat'>
+                        <span className='stat-icon'>🚙</span>
+                        <span className='stat-value'>{eachCalle.coches?.length || 0}</span>
+                        <span className='stat-label'>Ocupadas</span>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
-      </div>   
-    
+        <div className='main-content'>
+          {mostrarMapa && (
+            <div className='map-container'>
+              <div className='map-header'>
+                <h3>🗺️ Mapa Interactivo</h3>
+                <p>Haz clic en los marcadores para ver información de cada calle</p>
+              </div>
+              <div className='map-wrapper'>
+                <MapView detalles={filterList} />
+              </div>
+            </div>
+          )}
+          
+          {!mostrarMapa && (
+            <div className='empty-state'>
+              <div className='empty-icon'>🗺️</div>
+              <h3>Vista de Mapa</h3>
+              <p>Activa la vista de mapa para ver la ubicación de todas las calles</p>
+              <button className='activate-map-btn' onClick={handleClickMapa}>
+                Ver Mapa Interactivo
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   )
 }
