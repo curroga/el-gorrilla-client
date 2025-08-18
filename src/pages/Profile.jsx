@@ -14,20 +14,41 @@ function Profile() {
   
 
   return (
-    <div className="profile-container-body">
-      
-      <div>
-      <h2>Bievenido a tu perfil {user.username}</h2>
+    <div className="profile-container">
+      <div className="profile-header">
+        <div className="profile-avatar">
+          <div className="avatar-circle">
+            {user?.username?.charAt(0).toUpperCase()}
+          </div>
+        </div>
+        <div className="profile-info">
+          <h1 className="profile-title">Bienvenido, {user?.username}</h1>
+          <p className="profile-subtitle">Tu panel de control personal</p>
+          <div className="user-badges">
+            <span className="badge-role">{user?.role === 'admin' ? 'Administrador' : 'Usuario'}</span>
+          </div>
+        </div>
       </div>
 
-      <div>
-        <ListaFavoirtos />
-      </div>     
+      <div className="profile-content">
+        <div className="profile-section">
+          <div className="section-header">
+            <h3>🅿️ Calles Favoritas</h3>
+          </div>
+          <div className="section-content">
+            <ListaFavoirtos />
+          </div>
+        </div>
 
-      <div>
-        <CarList />
-      </div>    
-      
+        <div className="profile-section">
+          <div className="section-header">
+            <h3>🚗 Mis Vehículos</h3>
+          </div>
+          <div className="section-content">
+            <CarList />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
