@@ -30,22 +30,50 @@ function AddCars(props) {
 
 
   return (
-    <div>
-      <h3>Añadir nuevo coche</h3>
-      <form>
-        <label htmlFor="modelo">Modelo:</label>
-        <input value={modeloInput} type="text" name="modelo" onChange={handleModeloChange} />
-        <br />
+    <div className='add-car-container'>
+      <div className='add-car-header'>
+        <h3>🆕 Agregar Nuevo Vehículo</h3>
+        <p>Completa los datos de tu vehículo</p>
+      </div>
+      
+      <form className='add-car-form'>
+        <div className='form-group'>
+          <label htmlFor="modelo">🚙 Modelo del Vehículo</label>
+          <input 
+            value={modeloInput} 
+            type="text" 
+            name="modelo" 
+            onChange={handleModeloChange}
+            placeholder="Ej: Toyota Corolla, Honda Civic..."
+          />
+        </div>
 
-        <label htmlFor="matricula">Matricula:</label>
-        <input value={matriculaInput} type="text" name="matricula" onChange={handleMatriculaChange} />
-        <br />
+        <div className='form-group'>
+          <label htmlFor="matricula">🔢 Matrícula</label>
+          <input 
+            value={matriculaInput} 
+            type="text" 
+            name="matricula" 
+            onChange={handleMatriculaChange}
+            placeholder="Ej: 1234ABC"
+          />
+        </div>
 
-        <label htmlFor="color">Color:</label>
-        <input value={colorInput} type="text" name="color" onChange={handleColorChange} />
-        <br />
+        <div className='form-group'>
+          <label htmlFor="color">🎨 Color</label>
+          <input 
+            value={colorInput} 
+            type="text" 
+            name="color" 
+            onChange={handleColorChange}
+            placeholder="Ej: Rojo, Azul, Negro..."
+          />
+        </div>
 
-        <button onClick={handleSubmit}>Agregar</button>
+        <button className='submit-btn' type='button' onClick={handleSubmit}>
+          <span>✓</span>
+          Agregar Vehículo
+        </button>
       </form>
     </div>
   )

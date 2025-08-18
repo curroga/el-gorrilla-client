@@ -4,8 +4,7 @@ import InfoCard from './InfoCard'
 import { updateCarsService, deleteCarsService, getAllCarsService } from '../../services/cars.service'
 import { useNavigate } from 'react-router-dom'
 import { ClimbingBoxLoader } from "react-spinners"
-
-import Button from 'react-bootstrap/Button';
+import '../../styles/cars.css'
 
 
 
@@ -90,16 +89,76 @@ function CarList() {
 
   //5. renderizamos
   return (
-    <div>
-      <div className="infoCarsContainer">
-        <h2>Mis coches</h2>
-        {list.map((eachCar) => (
-          <InfoCard key={eachCar._id} item={eachCar} onUpdate={handleUpdate} onDelete={handleDelete} />
-          ))}
-          <Button variant="primary" onClick={handleClick}>Añadir coches</Button>
-      <div>
-      { mostrarAddCars === true ? <AddCars actualizarLista={getData} /> :null}
+    <div className='cars-container'>
+      <div className='cars-header'>
+        <div className='header-content'>
+          <div className='title-section'>
+            <h1 className='page-title'>🚗 Mis Vehículos</h1>
+            <p className='page-subtitle'>Gestiona tu flota de vehículos registrados</p>
+          </div>
+          
+          <div className='header-actions'>
+            <button className='add-car-btn' onClick={handleClick}>
+              <span className='btn-icon'>➕</span>
+              Agregar Vehículo
+            </button>
+          </div>
+        </div>
       </div>
+
+      {mostrarAddCars && (
+        <div className='add-cars-modal'>
+          <div className='modal-content'>
+            <button className='close-modal' onClick={() => setMostrarAddCars(false)}>
+              ✕
+            </button>
+            <AddCars actualizarLista={getData} />
+          </div>
+        </div>
+      )}
+
+      <div className='cars-content'>
+        {list.length === 0 ? (
+          <div className='empty-state'>
+            <div className='empty-icon'>🚗</div>
+            <h3>No tienes vehículos registrados</h3>
+            <p>Comienza agregando tu primer vehículo para gestionar tu flota</p>
+            <button className='add-first-car-btn' onClick={handleClick}>
+              Agregar Mi Primer Vehículo
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className='cars-stats'>
+              <div className='stat-card'>
+                <div className='stat-icon'>🚙</div>
+                <div className='stat-info'>
+                  <span className='stat-value'>{list.length}</span>
+                  <span className='stat-label'>Vehículos totales</span>
+                </div>
+              </div>
+              
+              <div className='stat-card'>
+                <div className='stat-icon'>🔑</div>
+                <div className='stat-info'>
+                  <span className='stat-value'>{list.length}</span>
+                  <span className='stat-label'>Activos</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className='cars-grid'>
+              {list.map((eachCar) => (
+                <InfoCard 
+                  key={eachCar._id} 
+                  item={eachCar} 
+                  onUpdate={handleUpdate} 
+                  onDelete={handleDelete} 
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </div>
   )
