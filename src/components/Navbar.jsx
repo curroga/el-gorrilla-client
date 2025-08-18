@@ -1,55 +1,80 @@
 import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { AuthContext } from '../context/auth.context'
+import '../styles/navbar.css'
 
 
 function Navbar() {
 
-  const { authenticaUser, isLoggedIn } = useContext(AuthContext)
+  const { authenticaUser, isLoggedIn, user } = useContext(AuthContext)
 
   const handleLogout = () =>{
-    localStorage.removeItem("authToken") // borramos el token 
-    authenticaUser()// volvemos a invocar para actualizar el componente y ahora si nuestro estado parasara a falso
+    localStorage.removeItem("authToken")
+    authenticaUser()
   }
 
   const asignClassName = (navInfo) => {
-    //console.log(navInfo.isActive)
     if(navInfo.isActive === true) {
-      return "nav-active"
+      return "nav-link nav-link-active"
     } else {
-      return "nav-inactive"
+      return "nav-link"
     }
   }
 
   return (
-    <div>
-      {isLoggedIn === true ? (
-        <div className='nav'>
-          
-          <NavLink to="/profile" className={asignClassName}>
-            <button>Perfil</button>
-            </NavLink>
-
-          <NavLink to="/calles" className={asignClassName}>
-            <button>Calles</button>
-            </NavLink>
-            
-            <NavLink className='nav-inactive'>
-              <button onClick={handleLogout}>Cerrar Sesion</button>
-            </NavLink>
-
+    <nav className="modern-navbar">
+      <div className="navbar-container">
+        <div className="navbar-brand">
+          <span className="brand-icon">🅿️</span>
+          <span className="brand-text">El Gorrilla</span>
         </div>
-      ) : (
-        <div>
 
-          <NavLink to="/" className={asignClassName}>
-            <button>Home</button>
-          </NavLink> 
+        {isLoggedIn === true ? (
+          <>
+            <div className="navbar-menu">
+              <NavLink to="/profile" className={asignClassName}>
+                <span className="nav-icon">👤</span>
+                Perfil
+              </NavLink>
 
-        </div>
-      )
-    }
-    </div>
+              <NavLink to="/calles" className={asignClassName}>
+                <span className="nav-icon">🛣️</span>
+                Calles
+              </NavLink>
+
+              <NavLink to="/cars" className={asignClassName}>
+                <span className="nav-icon">🚗</span>
+                Vehículos
+              </NavLink>
+            </div>
+
+            <div className="navbar-user">
+              <div className="user-info">
+                <div className="user-avatar">
+                  {user?.username?.charAt(0).toUpperCase()}
+                </div>
+                <span className="user-name">{user?.username}</span>
+              </div>
+              <button className="logout-btn" onClick={handleLogout}>
+                <span className="logout-icon">🚪</span>
+                Salir
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className="navbar-menu">
+            <NavLink to="/" className={asignClassName}>
+              <span className="nav-icon">🏠</span>
+              Inicio
+            </NavLink>
+            <NavLink to="/signup" className={asignClassName}>
+              <span className="nav-icon">✍️</span>
+              Registro
+            </NavLink>
+          </div>
+        )}
+      </div>
+    </nav>
   )
 }
 
