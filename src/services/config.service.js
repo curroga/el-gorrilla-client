@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const service = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_URL
+  baseURL: import.meta.env.VITE_SERVER_URL || "http://localhost:5000/api"
 })
 
 // configuracion para asegurarnos de que en esta llamada(baseURL) va a estar el token y no de una manera expuesta, es decir cada vez que llamemos a ese url va a incluir el token

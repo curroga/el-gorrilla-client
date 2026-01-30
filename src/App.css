@@ -19,7 +19,7 @@
 
   height: 100vh;
 
-  background: url(../public/fondo-calle.jpg) no-repeat center center fixed;
+  background: url(/fondo-calle.jpg) no-repeat center center fixed;
   background-size: cover;
   
 

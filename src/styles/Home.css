@@ -105,7 +105,7 @@
 }
 
 .form-container .welcome-screen-container {
-  background-image: url(../../public/el-gorrilla.jpg);
+  background-image: url(/el-gorrilla.jpg);
   background-repeat: no-repeat;
   height: 100%;
   width: 50%;
