@@ -1,17 +1,28 @@
 .mapa {
-  width: 50vw;
-  height: 50vh;  
-  border: 1px solid red; 
-  border-radius: 50% 50% 50% 50%;
-  grid-area: mapa;    
-  
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 0;
 }
-.container-map {  
-  margin: 0 25vw;
-}
-.container-map-withDrag{
 
+.container-map {
+  width: 100%;
+  height: 100%;
+}
+
+.container-map-withDrag {
   width: 400px;
-  height: 400px;  
+  height: 400px;
+}
 
+/* Details page map specific styles */
+.details-map .container-map {
+  width: 100%;
+  height: 100%;
+}
+
+.details-map .mapa {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
 }

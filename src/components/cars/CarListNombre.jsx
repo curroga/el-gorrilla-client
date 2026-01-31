@@ -7,19 +7,16 @@ import { updateCochesEnCallesService, deleteCochesEnCallesService } from '../../
 
 import { useNavigate } from 'react-router-dom'
 
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button';
+import '../../styles/calles.css'
 
-function CarListNombre( {calleId, actualizar} ) { 
-  
+function CarListNombre({ calleId, actualizar, cochesAparcados = [] }) {
+
   const navigate = useNavigate()
 
-  //1. creamos el estado que almacena la data de la API
   const [list, setList] = useState([])
-  const [isFetching, setIsFetching] = useState(true)   
+  const [isFetching, setIsFetching] = useState(true)
+  const [loadingCarId, setLoadingCarId] = useState(null)
 
-  //2. LLamar a la API
   useEffect(() => {
     getData()
   }, [])
@@ -27,81 +24,112 @@ function CarListNombre( {calleId, actualizar} ) {
   const getData = async () => {
     try {
       const response = await getAllCarsService()
-      console.log(response)
-      //3. guardar la info en el estado      
-        setList(response.data)
-        setIsFetching(false)
-      
-
+      setList(response.data)
+      setIsFetching(false)
     } catch (error) {
       console.log(error)
       navigate("/error")
     }
   }
 
+  // Check if a car is parked in this street
+  const isCarParked = (carId) => {
+    return cochesAparcados.some(coche => coche._id === carId)
+  }
 
-  //4. clausula de guardia
-  if (isFetching === true){ 
-    return(
-       <div className="App"> 
-        <div className="spinner">
-          <ClimbingBoxLoader size={25} color={"#36d7b7"} />
+  const handleAparcar = async (cocheId) => {
+    setLoadingCarId(cocheId)
+    try {
+      await updateCochesEnCallesService(calleId, cocheId)
+      actualizar()
+    } catch (error) {
+      console.log(error)
+      navigate("/error")
+    } finally {
+      setLoadingCarId(null)
+    }
+  }
+
+  const handleQuitar = async (cocheId) => {
+    setLoadingCarId(cocheId)
+    try {
+      await deleteCochesEnCallesService(calleId, cocheId)
+      actualizar()
+    } catch (error) {
+      console.log(error)
+      navigate("/error")
+    } finally {
+      setLoadingCarId(null)
+    }
+  }
+
+  if (isFetching === true) {
+    return (
+      <div className="details-card">
+        <div className="details-card-header">
+          <h3>🚗 Mis Vehículos</h3>
+        </div>
+        <div className="loading-container">
+          <ClimbingBoxLoader size={15} color={"#667eea"} />
         </div>
       </div>
     )
   }
 
-  const handleAparcar = async (cocheId) => {
-    
-    console.log("Aqui mi id del coche para aparcar", cocheId)
-    console.log("Aqui mi id de la calle para aparcar", calleId)
-    
-    try {
-      await updateCochesEnCallesService(calleId, cocheId)
-      
-      actualizar()
-    } catch (error) {
-      console.log(error)
-      navigate("/error")
-    }
-
-  }
-  const handleQuitar = async (cocheId) => {
-    console.log("Aqui mi id del coche para quitar coche", cocheId)
-    console.log("Aqui mi id de la calle para quitar coche", calleId)
-    
-    try {
-      await deleteCochesEnCallesService(calleId, cocheId)
-      navigate(`/calles/${calleId}/details`) 
-      actualizar()
-    } catch (error) {
-      console.log(error)
-      navigate("/error")
-    }
-
-  }
-
-  //5. renderizamos
   return (
-    <Card style={{ width: "22rem" }}>      
-      
-      <Card.Header style={{ backgroundColor: "#68ec57", color:"rgb(87, 87, 240)", fontWeight: "bold"}}>Mis Coches</Card.Header>
+    <div className="details-card my-cars-card">
+      <div className="details-card-header">
+        <h3>🚗 Mis Vehículos</h3>
+        <span className="count-badge">{list.length}</span>
+      </div>
 
-        {list.map((eachCar) => (
-          <ListGroup variant="flush" key={eachCar._id}>
-            <ListGroup.Item style={{ backgroundColor: "rgb(87, 87, 240)", color: "white" }}>
-             <strong>{eachCar.modelo}</strong> 
-            </ListGroup.Item>
-            <Button variant="outline-danger" onClick={() => handleAparcar(eachCar._id)} >Aparcar</Button>
-            <Button variant="outline-success" onClick={() => handleQuitar(eachCar._id)}>Dejar Aparcamiento</Button>
-          </ListGroup>
-        ))}
+      {list.length === 0 ? (
+        <div className="empty-cars-message">
+          <p>No tienes vehículos registrados</p>
+        </div>
+      ) : (
+        <div className="my-cars-list">
+          {list.map((eachCar) => {
+            const parked = isCarParked(eachCar._id)
+            const isLoading = loadingCarId === eachCar._id
 
-      
-    </Card>
+            return (
+              <div key={eachCar._id} className={`my-car-card ${parked ? 'parked' : ''}`}>
+                <div className="my-car-info">
+                  <span className="my-car-icon">🚗</span>
+                  <div className="my-car-details">
+                    <span className="my-car-name">{eachCar.modelo}</span>
+                    <span className="my-car-plate">{eachCar.matricula}</span>
+                  </div>
+                  {parked && <span className="parked-here-badge">Aquí</span>}
+                </div>
+
+                <div className="my-car-actions">
+                  {parked ? (
+                    <button
+                      className="action-btn leave-btn"
+                      onClick={() => handleQuitar(eachCar._id)}
+                      disabled={isLoading}
+                    >
+                      {isLoading ? '...' : '🚪 Retirar'}
+                    </button>
+                  ) : (
+                    <button
+                      className="action-btn park-btn"
+                      onClick={() => handleAparcar(eachCar._id)}
+                      disabled={isLoading}
+                    >
+                      {isLoading ? '...' : '🅿️ Aparcar'}
+                    </button>
+                  )}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </div>
   )
 }
-  
-
 
 export default CarListNombre
