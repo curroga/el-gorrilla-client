@@ -450,28 +450,446 @@
   .calles-header {
     padding: 1rem;
   }
-  
+
   .title-section h1.page-title {
     font-size: 1.5rem;
   }
-  
+
   .header-actions {
     flex-direction: column;
     width: 100%;
   }
-  
+
   .add-street-btn, .map-toggle-btn {
     justify-content: center;
   }
-  
+
   .card-stats {
     grid-template-columns: 1fr;
     gap: 0.5rem;
   }
-  
+
   .stat {
     flex-direction: row;
     justify-content: space-between;
+    padding: 0.75rem;
+  }
+}
+
+/* ===================================
+   DETAILS PAGE STYLES
+   =================================== */
+
+/* Delete Button */
+.delete-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(239, 68, 68, 0.2);
+  color: white;
+}
+
+.delete-btn:hover {
+  background: rgba(239, 68, 68, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3);
+}
+
+/* Details Content Layout */
+.details-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 2rem;
+  min-height: calc(100vh - 200px);
+}
+
+.details-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.details-main {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Details Cards */
+.details-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.details-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.details-card-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* Availability Badge */
+.availability-badge {
+  padding: 0.35rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.availability-badge.available {
+  background: rgba(34, 197, 94, 0.15);
+  color: #16a34a;
+}
+
+.availability-badge.full {
+  background: rgba(239, 68, 68, 0.15);
+  color: #dc2626;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  background: #f1f5f9;
+  transform: translateY(-2px);
+}
+
+.stat-icon-large {
+  font-size: 1.8rem;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.stat-number.available-number {
+  color: #16a34a;
+}
+
+/* Parked Cars Section */
+.parked-cars-section {
+  border-top: 2px solid #f1f5f9;
+  padding-top: 1.5rem;
+}
+
+.parked-cars-section h4 {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.parked-cars-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.parked-car-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 10px;
+}
+
+.car-icon {
+  font-size: 1.2rem;
+}
+
+.car-name {
+  flex: 1;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.my-car-badge {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* My Cars Card */
+.my-cars-card {
+  flex: 1;
+}
+
+.my-cars-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.my-car-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.my-car-card.parked {
+  background: rgba(102, 126, 234, 0.1);
+  border-color: #667eea;
+}
+
+.my-car-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.my-car-icon {
+  font-size: 1.5rem;
+}
+
+.my-car-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.my-car-name {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.my-car-plate {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.parked-here-badge {
+  background: #667eea;
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.my-car-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.park-btn {
+  background: linear-gradient(45deg, #22c55e, #16a34a);
+  color: white;
+}
+
+.park-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+}
+
+.leave-btn {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+}
+
+.leave-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.action-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Details Map */
+.details-map {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.details-map .map-wrapper {
+  flex: 1;
+  min-height: 400px;
+}
+
+/* Loading Container */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+}
+
+/* Empty Cars Message */
+.empty-cars-message {
+  text-align: center;
+  padding: 2rem;
+  color: #64748b;
+}
+
+/* Delete Modal */
+.delete-modal {
+  max-width: 400px;
+  padding: 2rem;
+}
+
+.delete-modal-content {
+  text-align: center;
+}
+
+.delete-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.delete-modal-content h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.3rem;
+  color: #1e293b;
+}
+
+.delete-modal-content p {
+  margin: 0 0 1.5rem 0;
+  color: #64748b;
+}
+
+.delete-modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.cancel-btn {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  background: white;
+  color: #64748b;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.confirm-delete-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(45deg, #ef4444, #dc2626);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.confirm-delete-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+/* Details Page Responsive */
+@media (max-width: 1024px) {
+  .details-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .details-main {
+    order: 1;
+  }
+
+  .details-sidebar {
+    order: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .details-content {
+    padding: 1rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .details-map .map-wrapper {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .delete-modal-actions {
+    flex-direction: column;
+  }
+
+  .my-car-card {
     padding: 0.75rem;
   }
 }

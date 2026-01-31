@@ -22,10 +22,10 @@ const updateCallesService = (calleId, callesUpdate) => {
 }
 
 const updateCochesEnCallesService = (calleId, cocheId) => {
-  return service.patch(`/calle/${calleId}/${cocheId}`)  
+  return service.post(`/calle/${calleId}/coches/${cocheId}`)
 }
 const deleteCochesEnCallesService = (calleId, cocheId) => {
-  return service.patch(`/calle/delete/${calleId}/${cocheId}`)  
+  return service.delete(`/calle/${calleId}/coches/${cocheId}`)
 }
 
 const getCallesFavoritas = () => {
