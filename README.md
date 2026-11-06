@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# El Gorrilla — Client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React frontend for El Gorrilla, a parking spot finder: browse streets on a map,
+see free and occupied spots, register your cars and park them.
 
-## Available Scripts
+Built with **React 18 + Vite**, React Router 6, React Bootstrap, Leaflet
+(`react-leaflet`) and Axios. Tests run on **Vitest** + Testing Library.
 
-In the project directory, you can run:
+## Requirements
 
-### `npm start`
+- Node.js 20 (same version Netlify uses)
+- The API from `el-gorrilla-server` running locally or deployed
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Setup
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+npm install
+```
 
-### `npm test`
+The API base URL comes from `VITE_SERVER_URL`. When unset it defaults to
+`http://localhost:5000/api`. To point elsewhere, create a `.env` file:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+VITE_SERVER_URL=https://your-api.example.com/api
+```
 
-### `npm run build`
+## Scripts
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Command            | What it does                                        |
+| ------------------ | --------------------------------------------------- |
+| `npm run dev`      | Dev server on http://localhost:3000 (alias: `start`) |
+| `npm run build`    | Production build into `build/`                      |
+| `npm run preview`  | Serve the production build locally                  |
+| `npm test`         | Vitest in watch mode                                |
+| `npm run test:run` | Run the test suite once                             |
+| `npm run coverage` | Run the tests with a coverage report                |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Project structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+src/
+├── components/   UI pieces: maps/, cars/, calles/, Navbar, Login, IsPrivate
+├── pages/        Routed screens: Home, Signup, Profile, calles/, errores/
+├── context/      auth.context.js — session state
+├── services/     Axios clients for the API (auth, calles, cars)
+└── test/         Vitest setup, mocks and render helpers
+```
 
-### `npm run eject`
+Routes under `/profile`, `/calles` and `/cars` require login (`IsPrivate`).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Deployment
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Deployed on Netlify (`netlify.toml`): runs `npm run build`, publishes `build/`,
+and redirects every path to `index.html` so client-side routing works.
