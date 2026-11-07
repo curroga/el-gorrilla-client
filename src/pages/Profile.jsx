@@ -1,4 +1,4 @@
-import ListaFavoirtos from "../components/calles/ListaFavoirtos"
+import ListaFavoritos from "../components/calles/ListaFavoritos"
 import CarList from "../components/cars/CarList"
 import "../styles/profile.css"
 
@@ -146,7 +146,7 @@ function Profile() {
               </div>
             </div>
             <div className="panel-content">
-              <ListaFavoirtos />
+              <ListaFavoritos />
             </div>
           </section>
 

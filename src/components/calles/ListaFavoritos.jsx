@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-function ListaFavoirtos() {
+function ListaFavoritos() {
 
   const { user } = useContext(AuthContext)
   const [listaFavorita, setListaFavorita] = useState([])
@@ -59,4 +59,4 @@ function ListaFavoirtos() {
   )
 }
 
-export default ListaFavoirtos
+export default ListaFavoritos
