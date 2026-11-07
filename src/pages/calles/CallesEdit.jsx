@@ -19,8 +19,7 @@ function CallesEdit() {
 
   const [ nameInput, setNameInput] = useState("")
   const [ numAparcamientosInput, setNumAparcamientosInput] = useState(0)
-  const [ numOcupadosInput, setNumOcupadosInput] = useState(0)
-  const [ numLibresInput, setNumLibresInput] = useState(0)
+  const [ ocupadosExternosInput, setOcupadosExternosInput] = useState(0)
   const [isFetching, setIsFetching] = useState(true) 
   const [ coordinates, setCoordinates ] = useState([0, 0])
 
@@ -38,8 +37,7 @@ function CallesEdit() {
       console.log(response.data)
       setNameInput(response.data.name)
       setNumAparcamientosInput(response.data.numAparcamientos)
-      setNumOcupadosInput(response.data.numOcupados)
-      setNumLibresInput(response.data.numLibres)
+      setOcupadosExternosInput(response.data.ocupadosExternos ?? 0)
       setCoordinates(response.data.positionMarker)
       setIsFetching(false)
 
@@ -51,19 +49,17 @@ function CallesEdit() {
 
   const nameChange = (e) => setNameInput(e.target.value)
   const numAparcamientosChange = (e) => setNumAparcamientosInput(e.target.value)
-  const numOcupadosChange = (e) => setNumOcupadosInput(e.target.value)
-  const numLibresChange = (e) => setNumLibresInput(e.target.value)
+  const ocupadosExternosChange = (e) => setOcupadosExternosInput(e.target.value)
   
 
   const handleUpdate = async (event)=>{
     event.preventDefault()
     try {
-      console.log(numOcupadosInput)
       const updateCalle = {
         name: nameInput,
         numAparcamientos: numAparcamientosInput,
-        numOcupados: numOcupadosInput,
-        numLibres: numLibresInput,
+        // ocupados y libres los calcula el servidor; solo se envía el ajuste
+        ocupadosExternos: ocupadosExternosInput,
         positionMarker: coordinates
       }
 
@@ -103,13 +99,8 @@ function CallesEdit() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label >Aparcamientos agregados por el admin:</Form.Label>
-        <Form.Control value={numOcupadosInput} type="number" name='numOcupados' onChange={numOcupadosChange} />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label >Aparcamientos liberados por el admin:</Form.Label>
-        <Form.Control value={numLibresInput} type="number" name='numLibres' onChange={numLibresChange} />
+        <Form.Label >Ocupados por coches fuera de la app:</Form.Label>
+        <Form.Control value={ocupadosExternosInput} type="number" min="0" step="1" name='ocupadosExternos' onChange={ocupadosExternosChange} />
         </Form.Group>
 
         <Button variant="outline-success" onClick={handleUpdate}>Editar Calle</Button>
